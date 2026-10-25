@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sun, Moon } from "lucide-react";
@@ -28,7 +29,8 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-md">
       <div className="flex items-center justify-between px-4 py-3 md:px-6">
-        {/* Left: Sidebar + Brand */}
+
+        {/* Left Sidebar & Brand */}
         <div className="flex items-center gap-4">
           <SidebarTrigger />
           <span className="text-xl font-bold tracking-tight">
@@ -36,7 +38,7 @@ export default function Navbar() {
           </span>
         </div>
 
-        {/* Right: Controls */}
+        {/* Rightside Controls */}
         <div className="flex items-center gap-4">
           {/* Theme Toggle */}
           <Button
@@ -52,7 +54,7 @@ export default function Navbar() {
             )}
           </Button>
 
-          {/* Auth Controls */}
+          {/* Authentication Controls */}
           <div className="hidden sm:flex items-center gap-2">
             <Button variant="outline" size="sm" className="hover:shadow-sm">
               Sign In

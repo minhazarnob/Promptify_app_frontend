@@ -7,7 +7,7 @@ import vs2015 from "react-syntax-highlighter/dist/esm/styles/prism/atom-dark";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getChatMessages, promptGPT } from "@/lib/api";
-import TypingLoader from "@/components/TypingLoader";
+import TypingLoader from "../components/TypingLoader";
 
 export default function Homepage() {
   const location = useLocation();

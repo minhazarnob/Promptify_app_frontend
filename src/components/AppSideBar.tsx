@@ -1,35 +1,16 @@
-import {
-  Calendar,
-  Home,
-  Inbox,
-  Search,
-  Settings,
-  Bot,
-  MessageSquare,
-  Zap,
-  MessageSquarePlus,
-} from "lucide-react";
+import {Calendar, Home, Inbox, Search, Zap} from "lucide-react";
+import {Settings, Bot, MessageSquare, MessageSquarePlus} from "lucide-react";
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
+import {Sidebar, SidebarContent} from "@/components/ui/sidebar";
+import {SidebarGroupLabel, SidebarMenu,} from "@/components/ui/sidebar";
+import {SidebarGroup, SidebarGroupContent} from "@/components/ui/sidebar";
+import {SidebarMenuButton, SidebarMenuItem} from "@/components/ui/sidebar";
 import { Badge } from "@/components/ui/badge";
 import { Link, NavLink } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import {
-  getSevenDaysChats,
-  getTodaysChats,
-  getYesterdaysChats,
-} from "@/lib/api";
+import { getSevenDaysChats, getTodaysChats, getYesterdaysChats} from "@/lib/api";
 import { cn } from "@/lib/utils";
 
 const mainNav = [
