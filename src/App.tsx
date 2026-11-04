@@ -10,6 +10,7 @@ const App = () => {
         <Route path="/" element={<MainLayout/>}>
           <Route index element={<HomePage/>}/>
           <Route path="chats/:chat_uid" element={<HomePage/>}/>
+          <Route path="chats/new" element={<HomePage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

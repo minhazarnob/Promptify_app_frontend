@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import { SendHorizonalIcon } from "lucide-react";
 import ReactMarkdown from "react-markdown";
@@ -20,11 +21,12 @@ export default function Homepage() {
   useEffect(() => {
     if (chat_uid) {
       setChatID(chat_uid);
-    } else {
+    } 
+    else {
       setChatID(crypto.randomUUID());
     }
 
-    console.log("chat id changed!!")
+    console.log("Chat id changed!!")
   }, [chat_uid]);
 
   const [messages, setMessages] = useState([
@@ -42,7 +44,7 @@ export default function Homepage() {
     },
   });
 
-  const { data: chatData } = useQuery({
+  const { isPending: chatPending, isError: chatError, data: chatData } = useQuery({
     queryKey: ["chatMessages", chatID],
     queryFn: () => getChatMessages(chatID),
   });
@@ -109,21 +111,14 @@ export default function Homepage() {
               >
                 <ReactMarkdown
                   components={{
-                    code({ inline, className, children }) {
-                      const match = /language-(\w+)/.exec(className || "");
-                      return !inline && match ? (
-                        <SyntaxHighlighter
-                          style={vs2015}
-                          language={match[1]}
-                          PreTag="div"
-                          className="rounded-md"
-                        >
-                          {String(children).replace(/\n$/, "")}
+                    code({ className, children, ...props }) {
+                      const match = /language-(\w+)/.exec(className || '');
+                      return match ? (
+                        <SyntaxHighlighter language={match[1]} PreTag="div">
+                          {String(children).replace(/\n$/, '')}
                         </SyntaxHighlighter>
                       ) : (
-                        <code className="bg-muted rounded px-1 py-0.5 text-sm">
-                          {children}
-                        </code>
+                        <code className={className} {...props}>{children}</code>
                       );
                     },
                   }}
