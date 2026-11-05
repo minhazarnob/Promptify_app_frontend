@@ -1,10 +1,9 @@
-
 import { useEffect, useRef, useState } from "react";
 import { SendHorizonalIcon } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import vs2015 from "react-syntax-highlighter/dist/esm/styles/prism/atom-dark";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getChatMessages, promptGPT } from "@/lib/api";
@@ -13,7 +12,7 @@ import TypingLoader from "../components/TypingLoader";
 export default function Homepage() {
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   const [input, setInput] = useState("");
   const [chatID, setChatID] = useState("");
   const { chat_uid } = useParams();
@@ -21,12 +20,11 @@ export default function Homepage() {
   useEffect(() => {
     if (chat_uid) {
       setChatID(chat_uid);
-    } 
-    else {
+    } else {
       setChatID(crypto.randomUUID());
     }
 
-    console.log("Chat id changed!!")
+    console.log("Chat id changed!!");
   }, [chat_uid]);
 
   const [messages, setMessages] = useState([
@@ -44,7 +42,7 @@ export default function Homepage() {
     },
   });
 
-  const { isPending: chatPending, isError: chatError, data: chatData } = useQuery({
+  const { data: chatData } = useQuery({
     queryKey: ["chatMessages", chatID],
     queryFn: () => getChatMessages(chatID),
   });
@@ -112,13 +110,19 @@ export default function Homepage() {
                 <ReactMarkdown
                   components={{
                     code({ className, children, ...props }) {
-                      const match = /language-(\w+)/.exec(className || '');
+                      const match = /language-(\w+)/.exec(className || "");
                       return match ? (
-                        <SyntaxHighlighter language={match[1]} PreTag="div">
-                          {String(children).replace(/\n$/, '')}
+                        <SyntaxHighlighter
+                          language={match[1]}
+                          style={atomDark}
+                          PreTag="div"
+                        >
+                          {String(children).replace(/\n$/, "")}
                         </SyntaxHighlighter>
                       ) : (
-                        <code className={className} {...props}>{children}</code>
+                        <code className={className} {...props}>
+                          {children}
+                        </code>
                       );
                     },
                   }}
